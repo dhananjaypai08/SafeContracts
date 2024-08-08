@@ -25,9 +25,9 @@ const testnet = {
 }
 
 const metadata = {
-  name: 'BNBBro',
+  name: 'SafeContracts',
   description: 'Decentralized Smart Contract Reliability Checker',
-  url: 'https://bnbbro.com',
+  url: 'https://SafeContracts.com',
   icons: ['https://example.com/icon.png']
 };
 
@@ -80,6 +80,7 @@ function Home() {
         aiStatus: result[1],
         flagCount: result[2].toString()
       });
+      console.log(result);
     } catch (error) {
       console.error('Error searching contract:', error);
       setContractInfo(null);
@@ -117,7 +118,7 @@ function Home() {
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-gray-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">BNBBro</h1>
+          <h1 className="text-2xl font-bold">SafeContracts</h1>
             <w3m-button />
           {isConnected && (
             <button onClick={disconnect} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
@@ -191,7 +192,7 @@ function Home() {
             <button
               onClick={() => {open({view: 'OnRampProviders'})}}
               disabled={loading}
-              className="mt-6 bg-blue-500 hover:bg-yellow-600 px-6 py-2 rounded disabled:opacity-50"
+              className="mt-6 bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded disabled:opacity-50"
             >
               Stake Native Crypto
             </button>
@@ -201,7 +202,7 @@ function Home() {
 
       <footer className="bg-gray-800 mt-12 py-6">
         <div className="container mx-auto text-center text-gray-400">
-          <p>&copy; 2024 BNBBro. All rights reserved.</p>
+          <p>&copy; 2024 SafeContracts. All rights reserved.</p>
         </div>
       </footer>
     </div>

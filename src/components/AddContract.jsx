@@ -3,6 +3,7 @@ import { useWeb3ModalAccount } from '@web3modal/ethers/react';
 import { BrowserProvider, Contract } from 'ethers';
 import contractData from '../contracts/Contract.json';
 import { create } from "ipfs-http-client";
+import axios from 'axios';
 
 const AddContract = ({ walletProvider }) => {
   const projectId = '2WCbZ8YpmuPxUtM6PzbFOfY5k4B';
@@ -26,6 +27,7 @@ const AddContract = ({ walletProvider }) => {
   const [contractCode, setContractCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('');
+  const [AIScore, setAIScore] = useState();
   
 
   const addContractToBlockchain = async (cid) => {
@@ -36,7 +38,18 @@ const AddContract = ({ walletProvider }) => {
     console.log(provider, signer, contract, contractwithsigner, address, contractAddress, contractData.address);
     
     try {
-      const tx = await contractwithsigner.addContract(address, contractAddress, cid, 'Safe');
+      let message;
+      if(AIScore < 3){
+        message = "Unsafe";
+      } else if(AIScore <=5){
+        message = "Moderately Unsafe";
+      } else if(AIScore <=7){
+        message = "Moderately Safe";
+      } else{
+        message = "Safe";
+      }
+      console.log(message, AIScore, typeof(AIScore));
+      const tx = await contractwithsigner.addContract(address, contractAddress, cid, message);
       const receipt = await tx.wait();
       console.log('Transaction receipt:', receipt);
       return receipt;
@@ -64,7 +77,10 @@ const AddContract = ({ walletProvider }) => {
       const res = await ipfs_client.add(data);
       console.log('IPFS response:', res);
       console.log('IPFS URL:', BASE_IPFS_URL + res.path);
-      
+      const response = await axios.post("http://127.0.0.1:8000/getReliability", {code: contractCode});
+      console.log(response.data);
+      setAIScore(response.data);
+
       setStatus('Adding contract to blockchain...');
       const receipt = await addContractToBlockchain(res.path);
       
