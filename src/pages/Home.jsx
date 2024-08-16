@@ -4,6 +4,8 @@ import { useWeb3ModalProvider, useWeb3ModalAccount, useDisconnect, useWeb3ModalT
 import { BrowserProvider, Contract } from 'ethers';
 import contractData from '../contracts/Contract.json';
 import AddContract from '../components/AddContract';
+import Safe, { PredictedSafeProps } from '@safe-global/protocol-kit'
+
 
 // Web3Modal configuration
 const projectId = 'a7a2557c75d9558a9c932d5f99559799';
@@ -49,6 +51,17 @@ createWeb3Modal({
   enableAnalytics: true,
   themeMode: 'light'
 });
+
+const predictedSafe: PredictedSafeProps = {
+  safeAccountConfig,
+  safeDeploymentConfig
+}
+
+const protocolKit = await Safe.init({
+  provider,
+  signer,
+  predictedSafe
+})
 
 function Home() {
   const { address, isConnected } = useWeb3ModalAccount();
