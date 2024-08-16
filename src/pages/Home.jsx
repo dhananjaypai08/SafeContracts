@@ -121,7 +121,7 @@ function Home() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-200 to-gray-300 text-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-gray-300 to-gray-400 text-gray-800">
       <header className="bg-white shadow-md p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-600">SafeContracts</h1>

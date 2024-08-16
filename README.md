@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# SafeContracts: Your Shield in the DeFi World.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+SafeContracts is a pioneering decentralized security solution that empowers users and developers to confidently navigate the complex DeFi landscape. 
 
-### `npm start`
+By combining human expertise with cutting-edge AI, we provide a comprehensive suite of tools to assess, verify, and rate the security of smart contracts. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Our platform mitigates the risk of financial loss and exploits, fostering a more secure and trustworthy DeFi ecosystem.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+SafeContracts is a decentralized managed security service deployed on the BNB Smart Chain, designed to mitigate the pervasive risk of interacting with malicious smart contracts. By combining human intelligence and advanced AI, we provide a robust, multi-faceted approach to smart contract security assessment.
 
-### `npm test`
+### Problem Solved
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The decentralized nature of the blockchain, while offering unprecedented financial freedom, also introduces significant security challenges. 
+- Malicious actors exploit vulnerabilities in smart contracts, leading to substantial financial losses for users. 
+- SafeContracts addresses this critical issue by providing a robust, multi-layered security framework.
+-  Our platform empowers users to make informed decisions by offering transparent security assessments, simplifies the onboarding process through social login integration, and incentivizes participation in secure DeFi ecosystems through staking rewards. This is built using <h6>WalletConnect, Safe protocol kit, Coinbase OnRamp and 1inch Network </h6>
+- By establishing a trust-building mechanism with digital trust certificates, SafeContracts is at the forefront of creating a safer and more secure DeFi environment.
 
-### `npm run build`
+### How it works
+- Our platform leverages a community-driven vetting process, enabling users to flag potentially unsafe contracts. 
+- Simultaneously, our proprietary AI model scrutinizes contract code, alongside real-time on-chain asset valuations derived from 1inch's aggregated portfolio data. 
+- This comprehensive analysis yields a security rating between 1 and 10, quantifying contract risk.
+- To foster seamless user onboarding and interaction, we offer social login integration, allowing users to create smart accounts linked to their existing digital identities. 
+- Contracts achieving stringent safety benchmarks through both community and AI evaluation are eligible for staking, incentivizing participation in a secure DeFi ecosystem. 
+- Our whitelisting mechanism further solidifies trust by issuing digital trust certificates to verified contracts, enhancing transparency and accountability within the decentralized landscape.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
