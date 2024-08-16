@@ -1,6 +1,5 @@
-# SafeContracts: Your Shield in the DeFi World.
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SafeContracts: 
+Your Shield in the DeFi World.
 
 ## Description
 
