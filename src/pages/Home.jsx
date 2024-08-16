@@ -125,8 +125,11 @@ function Home() {
       <header className="bg-white shadow-md p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-600">SafeContracts</h1>
+          <a href="/chat" className="text-black-600 font-bold hover:text-blue-600 transition">ChatWitAI</a>
+          {isConnected && <button onClick={() => disconnect()} className="bg-black text-white px-6 py-2 rounded-r hover:bg-gray-800 transition disabled:opacity-50">Disconnect</button>}
           <nav className="space-x-4">
-            {/* <a href="#" className="text-gray-600 hover:text-blue-600 transition">About</a>
+            
+            {/* 
             <a href="#" className="text-gray-600 hover:text-blue-600 transition">Services</a>
             <a href="#" className="text-gray-600 hover:text-blue-600 transition">Contact</a> */}
             <w3m-button />
@@ -180,7 +183,7 @@ function Home() {
                 </p>
               </div>
               <div>
-                <p className="text-black-600">Community Flags:</p>
+                <p className="text-black-600">Community Flags(No. of ppl that marked this contract as Unsafe):</p>
                 <p>{contractInfo.flagCount}</p>
               </div>
             </div>

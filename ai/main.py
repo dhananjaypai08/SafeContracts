@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 import requests
+import time 
 
 app = FastAPI()
 load_dotenv()
@@ -53,6 +54,20 @@ async def getCurrentVal(walletAddress: str):
     }
     response = requests.get(apiUrl, headers=headers)
     return response.json()
+
+@app.post("/query")
+async def chat(request: Request):
+    body = await request.json()
+    query = body["query"]
+    tokens = query.split()
+    if "secure" in tokens or "safe" in tokens:
+        res = "The most secure smart contract is 0x057155e1e3E6b850E11f09AA18D482e3556b6CfF"
+    elif "describe" in tokens or "description" in tokens or "name" in tokens:
+        res = "The above smart contract is from SafeContract which is a vulnerability finder service and current contracts volume added in it is : 6."
+    else:
+        res = "Something went wrong. Please try again"
+    time.sleep(1)
+    return res 
     
 
 if __name__ == "__main__":
