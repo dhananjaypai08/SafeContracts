@@ -34,6 +34,12 @@ const metadata = {
 const ethersConfig = defaultConfig({
   metadata,
   defaultChainId: 11155111,
+  auth: {
+    email: true, // default to true
+    socials: ['google', 'x', 'github', 'discord', 'apple', 'facebook', 'farcaster'],
+    showWallets: true, // default to true
+    walletFeatures: true // default to true
+  }
 });
 
 createWeb3Modal({
@@ -41,7 +47,7 @@ createWeb3Modal({
   chains: [testnet],
   projectId,
   enableAnalytics: true,
-  themeMode: 'dark'
+  themeMode: 'light'
 });
 
 function Home() {
@@ -115,93 +121,92 @@ function Home() {
 
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <header className="bg-gray-800 p-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-200 to-gray-300 text-gray-800">
+      <header className="bg-white shadow-md p-4 sticky top-0 z-10">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">SafeContracts</h1>
+          <h1 className="text-2xl font-bold text-blue-600">SafeContracts</h1>
+          <nav className="space-x-4">
+            {/* <a href="#" className="text-gray-600 hover:text-blue-600 transition">About</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600 transition">Services</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600 transition">Contact</a> */}
             <w3m-button />
-          {isConnected && (
-            <button onClick={disconnect} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
-              Disconnect
-            </button>
-          ) 
-          }
+          </nav>
         </div>
       </header>
 
       <main className="container mx-auto mt-8 px-4">
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4">Smart Contract Reliability Checker</h2>
-          <p className="text-gray-300 mb-6">
-            Check the reliability of any smart contract by entering its address below. Our AI-powered system and community feedback will help you determine if a contract is safe to interact with.
+        <section className="mb-12 text-center">
+          <h2 className="text-4xl font-bold mb-4 text-blue-600">Smart Contract Reliability Checker</h2>
+          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Ensure the safety of your interactions. Our AI-powered system and community feedback help you determine if a contract is reliable.
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center">
             <input
               type="text"
               value={searchAddress}
               onChange={(e) => setSearchAddress(e.target.value)}
               placeholder="Enter contract address"
-              className="flex-grow px-4 py-2 bg-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-grow max-w-md px-4 py-2 bg-white border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={searchContract}
               disabled={!isConnected || loading}
-              className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded disabled:opacity-50"
+              className="bg-black text-white px-6 py-2 rounded-r hover:bg-gray-800 transition disabled:opacity-50"
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
           <button
-              onClick={() => callAddContractFlag(true)}
-              className="mt-6 bg-yellow-500 hover:bg-yellow-600 px-6 py-2 rounded disabled:opacity-50"
-            >
-              {msgButtonAddContract}
+            onClick={() => callAddContractFlag(true)}
+            className="mt-6 bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+          >
+            {msgButtonAddContract}
           </button>
-          {AddContractFlag &&
-          <AddContract walletProvider={walletProvider}/>
-          }
+          {AddContractFlag && <AddContract walletProvider={walletProvider} />}
         </section>
 
         {contractInfo && (
-          <section className="bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-4">Contract Information</h3>
-            <div className="grid grid-cols-2 gap-4">
+          <section className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4 text-blue-600">Contract Information</h3>
+            <div className="grid grid-cols-1 gap-4">
               <div>
-                <p className="text-gray-400">Owner:</p>
+                <p className="text-black-600">Owner:</p>
                 <p className="font-mono">{contractInfo.owner}</p>
               </div>
               <div>
-                <p className="text-gray-400">AI Status:</p>
-                <p className={`font-bold ${contractInfo.aiStatus === 'Safe' ? 'text-green-500' : 'text-red-500'}`}>
+                <p className="text-black-600">AI Status:</p>
+                <p className={`font-bold ${contractInfo.aiStatus === 'Safe' ? 'text-green-600' : 'text-red-600'}`}>
                   {contractInfo.aiStatus}
                 </p>
               </div>
               <div>
-                <p className="text-gray-400">Community Flags:</p>
+                <p className="text-black-600">Community Flags:</p>
                 <p>{contractInfo.flagCount}</p>
               </div>
             </div>
-            {flaggedState && <p className="text-black-400">Contract Flagged</p>}
-            <button
-              onClick={flagContract}
-              disabled={loading}
-              className="mt-6 bg-yellow-500 hover:bg-yellow-600 px-6 py-2 rounded disabled:opacity-50"
-            >
-              {loading ? 'Flagging...' : 'Flag as Unsafe'}
-            </button>
-            <button
-              onClick={() => {open({view: 'OnRampProviders'})}}
-              disabled={loading}
-              className="mt-6 bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded disabled:opacity-50"
-            >
-              Stake Native Crypto
-            </button>
+            {flaggedState && <p className="text-red-600 mt-4">Contract Flagged</p>}
+            <div className="mt-6 space-x-4">
+              <button
+                onClick={flagContract}
+                disabled={loading}
+                className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition disabled:opacity-50"
+              >
+                {loading ? 'Flagging...' : 'Flag as Unsafe'}
+              </button>
+              <button
+                onClick={() => {open({view: 'OnRampProviders'})}}
+                disabled={loading}
+                className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition disabled:opacity-50"
+              >
+                Stake Native Crypto
+              </button>
+            </div>
           </section>
         )}
       </main>
 
-      <footer className="bg-gray-800 mt-12 py-6">
-        <div className="container mx-auto text-center text-gray-400">
+      <footer className="bg-white mt-12 py-6 shadow-inner">
+        <div className="container mx-auto text-center text-gray-600">
           <p>&copy; 2024 SafeContracts. All rights reserved.</p>
         </div>
       </footer>

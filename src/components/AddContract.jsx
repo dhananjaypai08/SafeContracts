@@ -10,15 +10,16 @@ const AddContract = ({ walletProvider }) => {
     const projectSecretKey = 'c8b676d8bfe769b19d88d8c77a9bd1e2';
     const authorization = "Basic " + btoa(projectId + ":" + projectSecretKey);
     const ipfs_client = create({
-      host: "ipfs.infura.io",
-      port: 5001,
-      protocol: "https",
-      apiPath: "/api/v0",
+      url: "https://ipfs.infura.io:5001/api/v0",
+      // port: 5001,
+      // protocol: "http",
+      // apiPath: "api/v0",
       headers:{
         authorization: authorization
       },
     });
-    const BASE_IPFS_URL = "https://ipfs.infura.io/ipfs/";
+    // const BASE_IPFS_URL = "https://ipfs.infura.io/ipfs/";
+    const BASE_IPFS_URL = "https://ipfs.io/ipfs/"
 
   const { address } = useWeb3ModalAccount();
   const [contractAddress, setContractAddress] = useState('');
@@ -28,7 +29,8 @@ const AddContract = ({ walletProvider }) => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('');
   const [AIScore, setAIScore] = useState();
-  
+
+  const chainId = 97;
 
   const addContractToBlockchain = async (cid) => {
     const provider = new BrowserProvider(walletProvider);
@@ -73,7 +75,10 @@ const AddContract = ({ walletProvider }) => {
         description: contractDescription,
         image: "encrypted",
       });
-  
+      const newval = await axios.get(`http://127.0.0.1:8000/getCurrentVal?walletAddress=${contractAddress}`);
+      const balance = newval.data.result;
+      const nativeBalance = balance[0].result[0].value_usd;
+      console.log(nativeBalance);
       const res = await ipfs_client.add(data);
       console.log('IPFS response:', res);
       console.log('IPFS URL:', BASE_IPFS_URL + res.path);
@@ -101,24 +106,26 @@ const AddContract = ({ walletProvider }) => {
   };
 
   return (
-    <div className="md:container bg-gray-900 p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-10">
-      <h2 className="text-3xl font-bold mb-6 text-blue-400">Add New Smart Contract</h2>
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-10">
+      <h2 className="text-3xl font-bold mb-6 text-white-600">Add New Smart Contract</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+        
         <div>
-          <label htmlFor="contractAddress" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="contractAddress" className="block text-sm font-medium text-black-600">
             Contract Address
           </label>
           <input
             type="text"
             id="contractAddress"
             value={contractAddress}
+            placeholder='Enter the new Contract Address'
             onChange={(e) => setContractAddress(e.target.value)}
-            className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         <div>
-          <label htmlFor="contractName" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="contractName" className="block text-sm font-medium text-black-600">
             Contract Name
           </label>
           <input
@@ -126,25 +133,13 @@ const AddContract = ({ walletProvider }) => {
             id="contractName"
             value={contractName}
             onChange={(e) => setContractName(e.target.value)}
-            className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder='Your Contract Name'
+            className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         <div>
-          <label htmlFor="contractDescription" className="block text-sm font-medium text-gray-300">
-            Contract Description
-          </label>
-          <textarea
-            id="contractDescription"
-            value={contractDescription}
-            onChange={(e) => setContractDescription(e.target.value)}
-            rows="3"
-            className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          ></textarea>
-        </div>
-        <div>
-          <label htmlFor="contractCode" className="block text-sm font-medium text-gray-300">
+          <label htmlFor="contractCode" className="block text-sm font-medium text-black-600">
             Contract Code
           </label>
           <textarea
@@ -152,7 +147,8 @@ const AddContract = ({ walletProvider }) => {
             value={contractCode}
             onChange={(e) => setContractCode(e.target.value)}
             rows="10"
-            className="mt-1 block w-full bg-gray-800 border border-gray-700 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+            placeholder='Enter your contract code'
+            className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           ></textarea>
         </div>
@@ -160,7 +156,7 @@ const AddContract = ({ walletProvider }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+            className="w-full bg-black text-white font-bold py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
           >
             {loading ? 'Processing...' : 'Add Contract'}
           </button>
@@ -168,7 +164,7 @@ const AddContract = ({ walletProvider }) => {
       </form>
       {status && (
         <div className="mt-4 text-center">
-          <p className="text-lg font-semibold text-green-400">{status}</p>
+          <p className="text-lg font-semibold text-blue-600">{status}</p>
         </div>
       )}
     </div>
